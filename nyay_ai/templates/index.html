@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nyay AI — न्याय AI | Multilingual Legal Rights Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #FF6B00;
+    --saffron-light: #FF9A3C;
+    --saffron-dark: #CC5500;
+    --deep-blue: #0A1628;
+    --navy: #0D2137;
+    --navy-mid: #1A3A5C;
+    --gold: #D4A017;
+    --gold-light: #F0C040;
+    --green-india: #138808;
+    --white: #FDFCF8;
+    --off-white: #F5F0E8;
+    --text-dark: #1A1A1A;
+    --text-mid: #3D3D3D;
+    --text-light: #7A7A7A;
+    --border: rgba(212, 160, 23, 0.25);
+    --shadow: 0 4px 30px rgba(10, 22, 40, 0.15);
+    --glow-saffron: 0 0 20px rgba(255, 107, 0, 0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans', sans-serif;
+    background: var(--deep-blue);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(19, 136, 8, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(212, 160, 23, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Ashoka Chakra watermark */
+  body::after {
+    content: '☸';
+    position: fixed;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40vw;
+    color: rgba(212, 160, 23, 0.03);
+    pointer-events: none;
+    z-index: 0;
+    animation: rotate 120s linear infinite;
+  }
+
+  @keyframes rotate { to { transform: translateY(-50%) rotate(360deg); } }
+
+  /* HEADER */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 22, 40, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: 16px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: var(--glow-saffron);
+  }
+
+  .logo-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+
+  .logo-text span {
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .btn-emergency {
+    background: linear-gradient(135deg, #DC2626, #991B1B);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: pulse-red 2s infinite;
+    transition: transform 0.2s;
+  }
+
+  .btn-emergency:hover { transform: scale(1.05); }
+
+  @keyframes pulse-red {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+  }
+
+  .btn-header {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-header:hover { background: rgba(255,255,255,0.12); }
+
+  /* MAIN LAYOUT */
+  .app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    min-height: calc(100vh - 64px);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    background: rgba(13, 33, 55, 0.6);
+    border-right: 1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+  }
+
+  .sidebar-section h3 {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+
+  .feature-btn {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--white);
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s;
+    margin-bottom: 6px;
+    font-family: 'Noto Sans', sans-serif;
+  }
+
+  .feature-btn:hover {
+    background: rgba(255, 107, 0, 0.12);
+    border-color: rgba(255, 107, 0, 0.3);
+    transform: translateX(2px);
+  }
+
+  .feature-btn.active {
+    background: rgba(255, 107, 0, 0.15);
+    border-color: var(--saffron);
+    color: var(--saffron-light);
+  }
+
+  .feature-btn .icon { font-size: 18px; }
+
+  /* Demo queries */
+  .demo-query {
+    background: rgba(212, 160, 23, 0.08);
+    border: 1px solid rgba(212, 160, 23, 0.2);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: var(--gold-light);
+    cursor: pointer;
+    margin-bottom: 6px;
+    transition: all 0.2s;
+    line-height: 1.4;
+  }
+
+  .demo-query:hover {
+    background: rgba(212, 160, 23, 0.15);
+    transform: translateX(2px);
+  }
+
+  /* CHAT AREA */
+  .chat-area {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 64px);
+  }
+
+  /* Messages container */
+  .messages-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    scroll-behavior: smooth;
+  }
+
+  .messages-container::-webkit-scrollbar { width: 4px; }
+  .messages-container::-webkit-scrollbar-track { background: transparent; }
+  .messages-container::-webkit-scrollbar-thumb { background: rgba(212, 160, 23, 0.3); border-radius: 2px; }
+
+  /* Welcome message */
+  .welcome-card {
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(212, 160, 23, 0.08));
+    border: 1px solid rgba(212, 160, 23, 0.25);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+  }
+
+  .welcome-card .ashoka { font-size: 48px; margin-bottom: 12px; animation: rotate 20s linear infinite; display: inline-block; }
+
+  .welcome-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+  }
+
+  .welcome-card .subtitle { color: var(--text-light); font-size: 14px; margin-bottom: 16px; }
+
+  .lang-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+
+  .lang-badge {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--gold-light);
+  }
+
+  /* Message bubbles */
+  .message {
+    display: flex;
+    gap: 12px;
+    animation: slideUp 0.4s ease;
+    max-width: 100%;
+  }
+
+  .message.user { flex-direction: row-reverse; }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .message-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    align-self: flex-start;
+  }
+
+  .message.user .message-avatar {
+    background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+    border: 1px solid var(--border);
+  }
+
+  .message.bot .message-avatar {
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    box-shadow: var(--glow-saffron);
+  }
+
+  .message-content { max-width: calc(100% - 54px); }
+
+  .message.user .message-content { align-items: flex-end; display: flex; flex-direction: column; }
+
+  .bubble {
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 100%;
+  }
+
+  .message.user .bubble {
+    background: linear-gradient(135deg, var(--navy-mid), rgba(26, 58, 92, 0.8));
+    border: 1px solid var(--border);
+    border-top-right-radius: 4px;
+    color: var(--white);
+  }
+
+  .message.bot .bubble {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(212, 160, 23, 0.2);
+    border-top-left-radius: 4px;
+    color: var(--white);
+  }
+
+  /* Response cards */
+  .response-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212, 160, 23, 0.15);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+
+  .response-section {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .response-section:last-child { border-bottom: none; }
+
+  .response-section h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--saffron-light);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .response-section p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--white);
+  }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag {
+    background: rgba(255, 107, 0, 0.12);
+    border: 1px solid rgba(255, 107, 0, 0.25);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--saffron-light);
+  }
+
+  .step-list { list-style: none; }
+
+  .step-list li {
+    padding: 6px 0;
+    font-size: 13px;
+    color: var(--off-white);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .step-list li::before {
+    content: '→';
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .contact-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .contact-chip {
+    background: rgba(19, 136, 8, 0.12);
+    border: 1px solid rgba(19, 136, 8, 0.3);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #4ADE80;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .contact-chip:hover { background: rgba(19, 136, 8, 0.2); }
+
+  /* Action buttons on response */
+  .response-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .action-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    color: var(--gold-light);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .action-btn:hover { background: rgba(212, 160, 23, 0.12); border-color: var(--gold); }
+
+  /* Typing indicator */
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 14px 18px;
+  }
+
+  .typing-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--saffron);
+    border-radius: 50%;
+    animation: bounce 1.2s infinite;
+  }
+
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-8px); }
+  }
+
+  /* INPUT AREA */
+  .input-area {
+    background: rgba(10, 22, 40, 0.95);
+    border-top: 1px solid var(--border);
+    padding: 16px 24px;
+    backdrop-filter: blur(20px);
+  }
+
+  .mode-indicator {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .mode-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green-india);
+    animation: pulse-green 2s infinite;
+  }
+
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .input-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  .input-wrapper {
+    flex: 1;
+    position: relative;
+  }
+
+  #userInput {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(212, 160, 23, 0.25);
+    border-radius: 14px;
+    color: var(--white);
+    font-size: 14px;
+    font-family: 'Noto Sans', sans-serif;
+    padding: 14px 50px 14px 18px;
+    resize: none;
+    outline: none;
+    line-height: 1.5;
+    max-height: 120px;
+    transition: border-color 0.2s;
+  }
+
+  #userInput:focus { border-color: var(--saffron); }
+  #userInput::placeholder { color: rgba(255,255,255,0.3); }
+
+  .mic-btn {
+    position: absolute;
+    right: 12px;
+    bottom: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.2s;
+    padding: 4px;
+  }
+
+  .mic-btn:hover { opacity: 1; transform: scale(1.1); }
+  .mic-btn.recording { opacity: 1; animation: pulse-red 1s infinite; }
+
+  .send-btn {
+    background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
+    border: none;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--glow-saffron);
+    flex-shrink: 0;
+  }
+
+  .send-btn:hover { transform: scale(1.05); }
+  .send-btn:disabled { opacity: 0.4; transform: none; }
+
+  /* MODALS */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.3s ease;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover { background: rgba(255,255,255,0.15); }
+
+  .modal h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 22px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Emergency Modal */
+  .emergency-rights { list-style: none; }
+
+  .emergency-right {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 14px;
+    line-height: 1.5;
+    animation: slideUp 0.4s ease;
+  }
+
+  .emergency-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .emergency-contact-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .emergency-contact-card:hover { background: rgba(255,107,0,0.1); border-color: var(--saffron); }
+  .emergency-contact-card .icon { font-size: 24px; }
+  .emergency-contact-card .name { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+  .emergency-contact-card .number { font-size: 18px; font-weight: 700; color: var(--gold-light); }
+
+  /* FIR Modal */
+  .fir-output {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 13px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    color: var(--off-white);
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .copy-btn {
+    background: rgba(212, 160, 23, 0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+    margin-top: 12px;
+  }
+
+  .copy-btn:hover { background: rgba(212, 160, 23, 0.25); }
+
+  /* Legal Help Modal */
+  .legal-center-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.2s;
+  }
+
+  .legal-center-card:hover { border-color: var(--saffron); background: rgba(255,107,0,0.05); }
+
+  .center-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .center-info h4 { font-size: 14px; color: var(--gold-light); margin-bottom: 4px; }
+  .center-info p { font-size: 12px; color: var(--text-light); }
+  .center-info .distance { color: var(--saffron-light); font-weight: 600; font-size: 13px; }
+
+  /* Document Checklist Modal */
+  .checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+    color: var(--off-white);
+  }
+
+  .checklist-item::before {
+    content: '📄';
+    font-size: 16px;
+  }
+
+  /* Language Badge */
+  .lang-detected {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(212, 160, 23, 0.1);
+    border: 1px solid rgba(212, 160, 23, 0.2);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 11px;
+    color: var(--gold-light);
+    margin-top: 4px;
+  }
+
+  /* Offline mode banner */
+  .offline-banner {
+    background: rgba(220, 150, 0, 0.1);
+    border: 1px solid rgba(220, 150, 0, 0.3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #FCD34D;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  /* Toast notification */
+  .toast {
+    position: fixed;
+    bottom: 90px;
+    right: 24px;
+    background: rgba(19, 136, 8, 0.9);
+    border: 1px solid var(--green-india);
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 13px;
+    z-index: 2000;
+    animation: slideUp 0.3s ease;
+    display: none;
+  }
+
+  /* Scroll to bottom button */
+  .scroll-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255,107,0,0.8);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: none;
+  }
+
+  /* Loading dots in button */
+  .loading { display: inline-flex; gap: 3px; align-items: center; }
+  .loading span { width: 5px; height: 5px; background: white; border-radius: 50%; animation: bounce 0.6s infinite; }
+  .loading span:nth-child(2) { animation-delay: 0.1s; }
+  .loading span:nth-child(3) { animation-delay: 0.2s; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .app-container { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .header-actions .btn-header { display: none; }
+    .emergency-contact-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* India flag stripe at top */
+  .flag-stripe {
+    height: 3px;
+    background: linear-gradient(to right, var(--saffron) 33.33%, white 33.33%, white 66.66%, var(--green-india) 66.66%);
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 12px 0;
+  }
+
+  .text-gold { color: var(--gold-light); }
+  .text-saffron { color: var(--saffron-light); }
+  .text-small { font-size: 12px; color: var(--text-light); }
+</style>
+</head>
+<body>
+
+<div class="flag-stripe"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <div class="logo-icon">⚖️</div>
+      <div class="logo-text">
+        <h1>Nyay AI • न्याय AI</h1>
+        <span>Multilingual Legal Rights Assistant for Rural India</span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <button class="btn-header" onclick="openModal('legalHelpModal'); loadLegalHelp()">🗺️ Legal Help Finder</button>
+      <button class="btn-header" onclick="openModal('checklistModal')">📋 Document Checklist</button>
+      <button class="btn-emergency" onclick="openModal('emergencyModal'); loadEmergency()">
+        🚨 Emergency Help
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN APP -->
+<div class="app-container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>⚡ Quick Actions</h3>
+      <button class="feature-btn" onclick="openModal('emergencyModal'); loadEmergency()">
+        <span class="icon">🚨</span>
+        <div><div>Emergency Help</div><div style="font-size:11px;opacity:0.6">Immediate legal rights</div></div>
+      </button>
+      <button class="feature-btn" onclick="requestFIR()">
+        <span class="icon">🧾</span>
+        <div><div>Generate FIR</div><div style="font-size:11px;opacity:0.6">Ready-to-use FIR format</div></div>
+      </button>
+      <button class="feature-btn" onclick="openModal('legalHelpModal'); loadLegalHelp()">
+        <span class="icon">🗺️</span>
+        <div><div>Legal Help Finder</div><div style="font-size:11px;opacity:0.6">Nearby aid centers</div></div>
+      </button>
+      <button class="feature-btn" onclick="openModal('checklistModal')">
+        <span class="icon">📋</span>
+        <div><div>Document Checklist</div><div style="font-size:11px;opacity:0.6">Required documents list</div></div>
+      </button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <h3>🎯 Demo Queries / नमुना प्रश्न</h3>
+      <div class="demo-query" onclick="sendDemoQuery(this.textContent)">
+        मला चोरी झाली, FIR कशी दाखल करावी?
+      </div>
+      <div class="demo-query" onclick="sendDemoQuery(this.textContent)">
+        पती मला मारहाण करतो, काय करावे?
+      </div>
+      <div class="demo-query" onclick="sendDemoQuery(this.textContent)">
+        कामाच्या ठिकाणी लैंगिक छळ होत आहे
+      </div>
+      <div class="demo-query" onclick="sendDemoQuery(this.textContent)">
+        पुलिस ने गिरफ्तार किया, मेरे क्या अधिकार हैं?
+      </div>
+      <div class="demo-query" onclick="sendDemoQuery(this.textContent)">
+        My employer is not paying minimum wages
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <h3>📞 Emergency Helplines</h3>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+          <span>🚔 Police</span><strong style="color:var(--gold-light)">100</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+          <span>👩 Women Helpline</span><strong style="color:var(--gold-light)">181</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+          <span>⚖️ NALSA Legal Aid</span><strong style="color:var(--gold-light)">15100</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+          <span>🚑 Ambulance</span><strong style="color:var(--gold-light)">108</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0">
+          <span>👶 Child Helpline</span><strong style="color:var(--gold-light)">1098</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div style="font-size:11px;color:var(--text-light);line-height:1.6">
+      <strong style="color:var(--gold-light)">Nyay AI</strong> provides general legal information. 
+      For specific advice, please consult a qualified lawyer.
+      <br><br>
+      🇮🇳 BNS • BNSS • POSH • Labour Laws • RTI • Domestic Violence Act
+    </div>
+  </aside>
+
+  <!-- CHAT AREA -->
+  <main class="chat-area">
+    <div class="messages-container" id="messagesContainer">
+      <!-- Welcome Card -->
+      <div class="welcome-card" id="welcomeCard">
+        <div class="ashoka">☸</div>
+        <h2>न्याय AI — Nyay AI</h2>
+        <p class="subtitle">आपल्या कायदेशीर हक्कांसाठी AI सहाय्यक | Your AI Legal Rights Assistant</p>
+        <div class="lang-badges">
+          <span class="lang-badge">🇮🇳 हिंदी</span>
+          <span class="lang-badge">🇮🇳 मराठी</span>
+          <span class="lang-badge">🇬🇧 English</span>
+        </div>
+        <p style="margin-top:14px;font-size:13px;color:var(--text-light)">
+          कायदेशीर प्रश्न विचारा • Ask your legal question • कोणत्याही भाषेत
+        </p>
+      </div>
+    </div>
+
+    <!-- INPUT AREA -->
+    <div class="input-area">
+      <div class="mode-indicator">
+        <div class="mode-dot"></div>
+        <span id="modeText">BNS • BNSS • POSH • Labour Laws | Hindi • Marathi • English</span>
+      </div>
+      <div class="input-row">
+        <div class="input-wrapper">
+          <textarea
+            id="userInput"
+            placeholder="कायदेशीर प्रश्न विचारा... (Hindi, Marathi, or English)"
+            rows="1"
+            onkeydown="handleKeydown(event)"
+            oninput="autoResize(this)"
+          ></textarea>
+          <button class="mic-btn" id="micBtn" onclick="toggleVoiceInput()" title="Voice Input">🎤</button>
+        </div>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- EMERGENCY MODAL -->
+<div class="modal-overlay" id="emergencyModal">
+  <div class="modal" style="border-color: rgba(220,38,38,0.4);">
+    <button class="modal-close" onclick="closeModal('emergencyModal')">✕</button>
+    <h2>🚨 Emergency Legal Rights</h2>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:16px">
+      अटक / पोलीस / धमकी | Arrest / Police / Harassment — तुमचे तात्काळ अधिकार
+    </p>
+    <ul class="emergency-rights" id="emergencyRights">
+      <li class="emergency-right">⏳ Loading your rights...</li>
+    </ul>
+    <div class="divider"></div>
+    <h3 style="font-size:13px;color:var(--gold-light);margin-bottom:12px">📞 तत्काळ संपर्क / Immediate Contacts</h3>
+    <div class="emergency-contact-grid" id="emergencyContacts"></div>
+  </div>
+</div>
+
+<!-- FIR MODAL -->
+<div class="modal-overlay" id="firModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('firModal')">✕</button>
+    <h2>🧾 FIR Generator</h2>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:16px">
+      तुमच्या घटनेवर आधारित FIR तयार करण्यात आली आहे
+    </p>
+    <div class="fir-output" id="firOutput">FIR generating...</div>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="copy-btn" onclick="copyFIR()">📋 Copy FIR</button>
+      <button class="copy-btn" onclick="printFIR()">🖨️ Print</button>
+    </div>
+    <div style="margin-top:12px">
+      <h4 style="font-size:12px;color:var(--saffron-light);margin-bottom:8px">📋 FIR दाखल करण्याचे पुढील टप्पे</h4>
+      <div id="firSteps"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LEGAL HELP MODAL -->
+<div class="modal-overlay" id="legalHelpModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('legalHelpModal')">✕</button>
+    <h2>🗺️ Legal Help Finder</h2>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:16px">
+      जवळचे कायदेशीर सहाय्य केंद्र / Nearest Legal Aid Centers
+    </p>
+    <div id="legalCenters">Loading...</div>
+  </div>
+</div>
+
+<!-- DOCUMENT CHECKLIST MODAL -->
+<div class="modal-overlay" id="checklistModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('checklistModal')">✕</button>
+    <h2>📋 Document Checklist</h2>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:16px">
+      तुमच्या प्रकरणासाठी आवश्यक कागदपत्रे
+    </p>
+    <div style="margin-bottom:14px">
+      <select id="checklistCategory" style="background:rgba(255,255,255,0.08);border:1px solid var(--border);color:white;padding:8px 12px;border-radius:8px;width:100%;font-family:inherit;outline:none" onchange="loadChecklist(this.value)">
+        <option value="fir">FIR / Police Complaint</option>
+        <option value="domestic_violence">Domestic Violence / घरगुती हिंसा</option>
+        <option value="posh">Workplace Harassment / POSH</option>
+        <option value="labour">Labour Complaint / कामगार तक्रार</option>
+        <option value="rti">RTI Application</option>
+      </select>
+    </div>
+    <div id="checklistContent">Select category above</div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== STATE ====================
+let isLoading = false;
+let isRecording = false;
+let recognition = null;
+let currentLanguage = 'hindi';
+let lastQuery = '';
+
+// ==================== INIT ====================
+document.addEventListener('DOMContentLoaded', function() {
+  initSpeechRecognition();
+  loadChecklist('fir');
+  
+  // Auto-resize textarea
+  const ta = document.getElementById('userInput');
+  ta.addEventListener('input', () => autoResize(ta));
+});
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function handleKeydown(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+// ==================== CHAT ====================
+async function sendMessage(queryOverride = null) {
+  const input = document.getElementById('userInput');
+  const query = queryOverride || input.value.trim();
+  
+  if (!query || isLoading) return;
+  
+  lastQuery = query;
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('sendBtn').disabled = true;
+  isLoading = true;
+  
+  // Remove welcome card
+  const wc = document.getElementById('welcomeCard');
+  if (wc) wc.remove();
+  
+  // Add user message
+  addMessage('user', query);
+  
+  // Add typing indicator
+  const typingId = addTypingIndicator();
+  
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({query})
+    });
+    
+    removeTypingIndicator(typingId);
+    
+    // Always try to parse JSON — even error responses contain a valid fallback
+    const data = await response.json();
+    currentLanguage = data.language || 'hindi';
+    
+    if (data.response) {
+      addBotResponse(data.response, data.is_crime, data.query_category, data.mode);
+    } else if (data.error && data.response) {
+      // Error but with a fallback response
+      addBotResponse(data.response, false, 'general', 'offline');
+    } else if (data.error) {
+      addMessage('bot', `⚠️ ${data.error}`);
+    } else {
+      // Unexpected shape – shouldn't happen
+      addMessage('bot', '⚠️ Unexpected response. Please try again.');
+    }
+    
+  } catch (err) {
+    removeTypingIndicator(typingId);
+    // Only shown when Flask server is completely unreachable (network error)
+    const offlineResponse = {
+      answer: '📵 सर्व्हर उपलब्ध नाही. खालील हेल्पलाइनवर संपर्क करा.\n\nServer unreachable. Please contact helplines below.',
+      relevant_sections: [],
+      next_steps: ['Police / पोलीस: 100', 'Women Helpline / महिला हेल्पलाइन: 181', 'Free Legal Aid / NALSA: 15100', 'Child Helpline: 1098'],
+      important_rights: ['FIR is FREE — police cannot refuse', 'Right to free lawyer (NALSA)', 'Magistrate within 24 hours of arrest'],
+      emergency_contacts: ['Police: 100', 'Women: 181', 'NALSA: 15100']
+    };
+    addBotResponse(offlineResponse, false, 'general', 'offline');
+  }
+  
+  isLoading = false;
+  document.getElementById('sendBtn').disabled = false;
+  scrollToBottom();
+}
+
+function sendDemoQuery(text) {
+  document.getElementById('userInput').value = text;
+  sendMessage();
+}
+
+function addMessage(type, text) {
+  const container = document.getElementById('messagesContainer');
+  const div = document.createElement('div');
+  div.className = `message ${type}`;
+  
+  div.innerHTML = `
+    <div class="message-avatar">${type === 'user' ? '👤' : '⚖️'}</div>
+    <div class="message-content">
+      <div class="bubble">${escapeHtml(text)}</div>
+    </div>
+  `;
+  
+  container.appendChild(div);
+  scrollToBottom();
+  return div;
+}
+
+function addBotResponse(response, isCrime, category, mode) {
+  const container = document.getElementById('messagesContainer');
+  const div = document.createElement('div');
+  div.className = 'message bot';
+  
+  const answer = response.answer || 'माहिती उपलब्ध नाही';
+  const sections = response.relevant_sections || [];
+  const steps = response.next_steps || [];
+  const rights = response.important_rights || [];
+  const contacts = response.emergency_contacts || [];
+  
+  let sectionsHtml = '';
+  if (sections.length) {
+    sectionsHtml = `
+      <div class="response-section">
+        <h4>⚖️ संबंधित कायदे / Relevant Laws</h4>
+        <div class="tag-list">
+          ${sections.map(s => `<span class="tag">${escapeHtml(s)}</span>`).join('')}
+        </div>
+      </div>`;
+  }
+  
+  let stepsHtml = '';
+  if (steps.length) {
+    stepsHtml = `
+      <div class="response-section">
+        <h4>📋 पुढील पावले / Next Steps</h4>
+        <ul class="step-list">
+          ${steps.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
+        </ul>
+      </div>`;
+  }
+  
+  let rightsHtml = '';
+  if (rights.length) {
+    rightsHtml = `
+      <div class="response-section">
+        <h4>🔐 महत्त्वाचे अधिकार / Important Rights</h4>
+        <ul class="step-list">
+          ${rights.map(r => `<li>${escapeHtml(r)}</li>`).join('')}
+        </ul>
+      </div>`;
+  }
+  
+  let contactsHtml = '';
+  if (contacts.length) {
+    contactsHtml = `
+      <div class="response-section">
+        <h4>📞 संपर्क / Emergency Contacts</h4>
+        <div class="contact-chips">
+          ${contacts.map(c => `<span class="contact-chip">📞 ${escapeHtml(c)}</span>`).join('')}
+        </div>
+      </div>`;
+  }
+  
+  const offlineBadge = mode === 'offline' 
+    ? '<span style="font-size:11px;background:rgba(220,150,0,0.15);border:1px solid rgba(220,150,0,0.3);border-radius:4px;padding:2px 8px;color:#FCD34D;margin-left:8px">📵 Offline</span>'
+    : '';
+  
+  const firBtn = isCrime 
+    ? `<button class="action-btn" onclick="generateFIRFromLast()">🧾 Generate FIR</button>` 
+    : '';
+  
+    div.innerHTML = `
+      <div class="message-avatar">⚖️</div>
+      <div class="message-content" style="max-width:100%">
+        <div class="bubble">
+          <strong style="color:var(--gold-light)">न्याय AI${offlineBadge}</strong>
+          <div style="margin-top:8px;font-size:14px;line-height:1.7">${escapeHtml(answer)}</div>
+        </div>
+        ${sectionsHtml || stepsHtml || rightsHtml || contactsHtml ? `
+        <div class="response-card">
+          ${sectionsHtml}
+          ${stepsHtml}
+          ${rightsHtml}
+          ${contactsHtml}
+        </div>` : ''}
+        <div class="response-actions">
+          <button class="action-btn" data-action="speak">🔊 Speak</button>
+          <button class="action-btn" data-action="docs">📋 Documents</button>
+          ${isCrime ? `<button class="action-btn" data-action="fir">🧾 Generate FIR</button>` : ''}
+          <button class="action-btn" data-action="copy">📋 Copy</button>
+        </div>
+      </div>
+    `;
+
+    // Attach robust listeners to avoid broken inline HTML attributes
+    div.querySelector('[data-action="speak"]').onclick = () => speakText(answer);
+    div.querySelector('[data-action="copy"]').onclick = () => copyToClipboard(answer);
+    div.querySelector('[data-action="docs"]').onclick = () => {
+      openModal('checklistModal');
+      loadChecklist(category);
+    };
+    if (isCrime) {
+      div.querySelector('[data-action="fir"]').onclick = () => generateFIRFromLast();
+    }
+  
+  container.appendChild(div);
+  scrollToBottom();
+}
+
+function addTypingIndicator() {
+  const container = document.getElementById('messagesContainer');
+  const div = document.createElement('div');
+  div.className = 'message bot';
+  div.id = 'typing-' + Date.now();
+  
+  div.innerHTML = `
+    <div class="message-avatar">⚖️</div>
+    <div class="message-content">
+      <div class="bubble" style="padding:10px 18px">
+        <div class="typing-indicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <span style="font-size:12px;color:var(--text-light);margin-left:6px">Analyzing laws...</span>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  container.appendChild(div);
+  scrollToBottom();
+  return div.id;
+}
+
+function removeTypingIndicator(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+// ==================== VOICE ====================
+function initSpeechRecognition() {
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SR();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = 'hi-IN'; // Hindi by default, also works for Marathi
+    
+    recognition.onresult = function(e) {
+      const transcript = Array.from(e.results)
+        .map(r => r[0].transcript)
+        .join('');
+      document.getElementById('userInput').value = transcript;
+    };
+    
+    recognition.onend = function() {
+      isRecording = false;
+      document.getElementById('micBtn').classList.remove('recording');
+      document.getElementById('micBtn').textContent = '🎤';
+    };
+    
+    recognition.onerror = function(e) {
+      showToast('Voice recognition error: ' + e.error);
+      isRecording = false;
+      document.getElementById('micBtn').classList.remove('recording');
+    };
+  }
+}
+
+function toggleVoiceInput() {
+  if (!recognition) {
+    showToast('Voice input not supported in this browser. Try Chrome.');
+    return;
+  }
+  
+  if (isRecording) {
+    recognition.stop();
+    isRecording = false;
+    document.getElementById('micBtn').classList.remove('recording');
+    document.getElementById('micBtn').textContent = '🎤';
+  } else {
+    recognition.start();
+    isRecording = true;
+    document.getElementById('micBtn').classList.add('recording');
+    document.getElementById('micBtn').textContent = '⏹️';
+    showToast('🎤 Listening... Speak in Hindi or Marathi');
+  }
+}
+
+function speakText(text) {
+  if (!text) return;
+  
+  const utterance = new SpeechSynthesisUtterance(text);
+  
+  // Select voice based on language
+  const voices = speechSynthesis.getVoices();
+  const hindiVoice = voices.find(v => v.lang.includes('hi') || v.lang.includes('mr'));
+  if (hindiVoice) utterance.voice = hindiVoice;
+  
+  utterance.rate = 0.85;
+  utterance.pitch = 1;
+  
+  speechSynthesis.cancel(); // Stop any current speech
+  speechSynthesis.speak(utterance);
+  showToast('🔊 Speaking response...');
+}
+
+// ==================== EMERGENCY ====================
+async function loadEmergency() {
+  try {
+    const res = await fetch('/api/emergency');
+    const data = await res.json();
+    
+    const rightsList = document.getElementById('emergencyRights');
+    rightsList.innerHTML = data.rights.map(r => 
+      `<li class="emergency-right">${escapeHtml(r)}</li>`
+    ).join('');
+    
+    const contactsGrid = document.getElementById('emergencyContacts');
+    contactsGrid.innerHTML = data.contacts.map(c => `
+      <div class="emergency-contact-card" onclick="copyToClipboard('${c.number}')">
+        <div class="icon">${c.icon}</div>
+        <div class="name">${c.name}</div>
+        <div class="number">${c.number}</div>
+      </div>
+    `).join('');
+    
+  } catch(e) {
+    document.getElementById('emergencyRights').innerHTML = `
+      <li class="emergency-right">🔴 Right to remain silent</li>
+      <li class="emergency-right">⚖️ Right to a lawyer - NALSA: 15100</li>
+      <li class="emergency-right">⏰ Must be produced before Magistrate within 24 hours</li>
+      <li class="emergency-right">📋 Right to know reason for arrest</li>
+      <li class="emergency-right">👨‍👩‍👧 Right to inform family</li>
+    `;
+  }
+}
+
+// ==================== FIR ====================
+function requestFIR() {
+  if (!lastQuery) {
+    document.getElementById('firOutput').textContent = 'पहिले एक प्रश्न विचारा / Please ask a question first about the incident.';
+    openModal('firModal');
+    return;
+  }
+  generateFIRFromLast();
+}
+
+async function generateFIRFromLast() {
+  openModal('firModal');
+  document.getElementById('firOutput').textContent = 'FIR तयार होत आहे... / Generating FIR...';
+  
+  try {
+    const res = await fetch('/api/generate-fir', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({query: lastQuery, language: currentLanguage})
+    });
+    
+    const data = await res.json();
+    
+    if (data.fir) {
+      document.getElementById('firOutput').textContent = data.fir;
+      
+      if (data.steps) {
+        document.getElementById('firSteps').innerHTML = data.steps.map(s => 
+          `<div class="checklist-item">${escapeHtml(s)}</div>`
+        ).join('');
+      }
+    }
+  } catch(e) {
+    document.getElementById('firOutput').textContent = 'FIR generation failed. Please try again.\n\nNote: FIR can be filed at any police station for free.';
+  }
+}
+
+function copyFIR() {
+  const text = document.getElementById('firOutput').textContent;
+  copyToClipboard(text);
+}
+
+function printFIR() {
+  const text = document.getElementById('firOutput').textContent;
+  const w = window.open('', '_blank');
+  w.document.write(`<html><body><pre style="font-family:serif;font-size:14px;line-height:1.8;padding:20px">${text}</pre></body></html>`);
+  w.document.close();
+  w.print();
+}
+
+// ==================== LEGAL HELP ====================
+async function loadLegalHelp() {
+  const container = document.getElementById('legalCenters');
+  container.innerHTML = 'Loading nearby centers...';
+  
+  try {
+    const res = await fetch('/api/legal-help');
+    const data = await res.json();
+    
+    const icons = {'Legal Aid': '⚖️', 'Police': '🚔', 'Helpline': '📞'};
+    
+    container.innerHTML = data.centers.map(c => `
+      <div class="legal-center-card">
+        <div class="center-icon">${icons[c.type] || '🏛️'}</div>
+        <div class="center-info">
+          <h4>${escapeHtml(c.name)}</h4>
+          <p>${escapeHtml(c.address)}</p>
+          <p style="margin-top:4px"><span class="distance">📍 ${c.distance}</span> • 📞 <strong style="color:var(--gold-light)">${c.phone}</strong></p>
+        </div>
+      </div>
+    `).join('');
+    
+  } catch(e) {
+    container.innerHTML = `
+      <div class="legal-center-card">
+        <div class="center-icon">⚖️</div>
+        <div class="center-info">
+          <h4>NALSA Legal Aid</h4>
+          <p>National Legal Services Authority</p>
+          <p><strong style="color:var(--gold-light)">15100</strong> (Toll Free)</p>
+        </div>
+      </div>
+    `;
+  }
+}
+
+// ==================== DOCUMENT CHECKLIST ====================
+async function loadChecklist(category) {
+  const container = document.getElementById('checklistContent');
+  
+  try {
+    const res = await fetch('/api/document-checklist', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({query: category})
+    });
+    
+    const data = await res.json();
+    
+    if (data.checklist) {
+      const cl = data.checklist;
+      container.innerHTML = `
+        <h4 style="color:var(--gold-light);font-size:13px;margin-bottom:12px">${escapeHtml(cl.title)}</h4>
+        ${cl.documents.map(d => `<div class="checklist-item">${escapeHtml(d)}</div>`).join('')}
+      `;
+    }
+  } catch(e) {
+    container.innerHTML = '<p style="color:var(--text-light);font-size:13px">Checklist not available. Police: 100 | NALSA: 15100</p>';
+  }
+}
+
+// ==================== MODALS ====================
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) closeModal(this.id);
+  });
+});
+
+// ==================== HELPERS ====================
+function scrollToBottom() {
+  const c = document.getElementById('messagesContainer');
+  setTimeout(() => c.scrollTop = c.scrollHeight, 100);
+}
+
+function escapeHtml(text) {
+  if (typeof text !== 'string') return String(text || '');
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+    .replace(/\n/g, '<br>');
+}
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('✅ Copied to clipboard!');
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('✅ Copied!');
+  });
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  setTimeout(() => toast.style.display = 'none', 3000);
+}
+
+// Keyboard shortcut: Escape to close modals
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+  }
+});
+
+// Offline detection
+window.addEventListener('offline', () => {
+  showToast('📵 Offline mode - Using local legal database');
+});
+
+window.addEventListener('online', () => {
+  showToast('🌐 Back online - AI responses enabled');
+});
+</script>
+</body>
+</html>

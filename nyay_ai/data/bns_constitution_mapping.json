@@ -1,0 +1,1091 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2026-04-25",
+    "format": "BNS Sections mapped to Constitution Articles with Victim Rights & Remedies",
+    "total_sections": 12,
+    "note": "This mapping provides constitutional backing, victim rights, and legal remedies for major BNS sections"
+  },
+  "bns_sections": [
+    {
+      "bns_id": 101,
+      "title": "Murder",
+      "description": "Causing death with intent to cause death or bodily injury likely to cause death",
+      "punishment": {
+        "imprisonment": "Death or Life",
+        "fine": "Yes",
+        "details": "Death penalty or life imprisonment + fine"
+      },
+      "constitution_articles": [
+        {
+          "article": 21,
+          "title": "Right to Life and Personal Liberty",
+          "relevance": "Protects victim's fundamental right to life",
+          "text": "No person shall be deprived of his life or personal liberty except according to procedure established by law"
+        },
+        {
+          "article": 14,
+          "title": "Equality Before Law",
+          "relevance": "Ensures equal justice for victim regardless of status",
+          "text": "The State shall not deny to any person equality before the law or the equal protection of the laws within the territory of India"
+        }
+      ],
+      "victim_rights": [
+        "Right to justice and compensation",
+        "Right to be heard in court (through victim impact statement)",
+        "Right to compensation from Victim Compensation Scheme",
+        "Right to free legal aid if victim is poor",
+        "Right to counseling and psychological support",
+        "Right to information about case status"
+      ],
+      "remedies_and_paths": [
+        {
+          "path_number": 1,
+          "name": "Criminal Prosecution",
+          "steps": [
+            "File FIR with police (Section 173 BNSS)",
+            "Police investigation",
+            "Chargesheet in court (within 90 days)",
+            "Trial before Sessions Court",
+            "Judgment and conviction"
+          ],
+          "time_expected": "2-3 years"
+        },
+        {
+          "path_number": 2,
+          "name": "Victim Compensation",
+          "steps": [
+            "Apply to State Victim Compensation Board",
+            "Submit supporting documents (FIR, medical reports)",
+            "Board assessment",
+            "Award compensation"
+          ],
+          "time_expected": "6-12 months",
+          "amount_range": "₹5-10 lakhs or more depending on state"
+        },
+        {
+          "path_number": 3,
+          "name": "Civil Suit for Damages",
+          "steps": [
+            "File suit in civil court",
+            "Prove loss and damages",
+            "Recovery of compensation"
+          ],
+          "time_expected": "2-4 years"
+        }
+      ],
+      "support_organizations": [
+        {
+          "name": "NALSA (National Legal Services Authority)",
+          "phone": "15100",
+          "services": "Free legal aid, victim support"
+        },
+        {
+          "name": "One-Stop Centre Scheme",
+          "services": "Counseling, legal aid, shelter for victims",
+          "website": "ossc.nic.in"
+        }
+      ]
+    },
+    {
+      "bns_id": 115,
+      "title": "Grievous Hurt",
+      "description": "Voluntarily causing serious bodily injury",
+      "punishment": {
+        "imprisonment": "Up to 7 years",
+        "fine": "Yes"
+      },
+      "constitution_articles": [
+        {
+          "article": 21,
+          "title": "Right to Life and Personal Liberty",
+          "relevance": "Protects bodily integrity and health"
+        },
+        {
+          "article": 19,
+          "subsection": "1(g)",
+          "title": "Freedom to Practice any Profession",
+          "relevance": "Victim's right to work is protected if injury affects livelihood"
+        }
+      ],
+      "victim_rights": [
+        "Right to medical treatment at government expense",
+        "Right to compensation for medical expenses and lost wages",
+        "Right to pain and suffering compensation",
+        "Right to disability compensation if permanently injured",
+        "Right to criminal proceedings against perpetrator"
+      ],
+      "remedies_and_paths": [
+        {
+          "path_number": 1,
+          "name": "Police FIR and Criminal Case",
+          "steps": [
+            "Lodge FIR under BNS 115",
+            "Get medical examination (under BNSS Section 54)",
+            "Police investigation",
+            "Prosecution in court",
+            "Conviction and punishment"
+          ],
+          "time_expected": "1-2 years"
+        },
+        {
+          "path_number": 2,
+          "name": "Medical Compensation",
+          "steps": [
+            "Document all medical expenses",
+            "Apply to Victim Compensation Scheme",
+            "Claim lost wages during recovery",
+            "Claim permanent disability benefits"
+          ],
+          "time_expected": "3-6 months",
+          "amount_range": "₹1-5 lakhs based on injury severity"
+        },
+        {
+          "path_number": 3,
+          "name": "Civil Suit for Tort",
+          "steps": [
+            "File suit claiming damages for negligence or assault",
+            "Recover compensation for pain, suffering, medical costs"
+          ]
+        }
+      ],
+      "support_organizations": [
+        {
+          "name": "District Legal Services Authority",
+          "services": "Free legal consultation"
+        },
+        {
+          "name": "Civil Hospital",
+          "services": "Free/subsidized medical treatment for poor"
+        }
+      ]
+    },
+    {
+      "bns_id": 303,
+      "title": "Theft",
+      "description": "Dishonestly taking moveable property without consent",
+      "punishment": {
+        "imprisonment": "Up to 3 years",
+        "fine": "Yes or both"
+      },
+      "constitution_articles": [
+        {
+          "article": 300,
+          "subsection": "A",
+          "title": "Right to Property (Amended)",
+          "relevance": "Protects victim's property rights",
+          "text": "No person shall be deprived of his property save by authority of law"
+        },
+        {
+          "article": 19,
+          "subsection": "1(g)",
+          "title": "Right to Profession/Business",
+          "relevance": "If theft affects victim's business/livelihood"
+        }
+      ],
+      "victim_rights": [
+        "Right to file FIR at any police station (Zero FIR)",
+        "Right to compensation for stolen property value",
+        "Right to police assistance in recovery of property",
+        "Right to information about investigation status",
+        "Right to claim restitution from convict"
+      ],
+      "remedies_and_paths": [
+        {
+          "path_number": 1,
+          "name": "Police FIR and Recovery",
+          "steps": [
+            "File FIR with police (Section 173 BNSS)",
+            "File written complaint if police refuses",
+            "Police investigation and recovery efforts",
+            "Prosecution if accused caught",
+            "Court orders recovery of property"
+          ],
+          "time_expected": "1-3 years",
+          "police_contact": "100"
+        },
+        {
+          "path_number": 2,
+          "name": "Insurance Claim",
+          "steps": [
+            "Submit insurance claim with FIR copy",
+            "Provide proof of property and damage",
+            "Receive compensation from insurance company"
+          ],
+          "time_expected": "30-60 days"
+        },
+        {
+          "path_number": 3,
+          "name": "Civil Recovery Suit",
+          "steps": [
+            "File suit for recovery of value of property",
+            "Prove ownership and value",
+            "Get judgment for recovery"
+          ],
+          "time_expected": "1-2 years"
+        }
+      ],
+      "support_organizations": [
+        {
+          "name": "Police Cyber Cell (for online theft/fraud)",
+          "phone": "100"
+        },
+        {
+          "name": "Insurance Regulator (IRDAI)",
+          "website": "irdai.gov.in"
+        }
+      ]
+    },
+    {
+      "bns_id": 64,
+      "title": "Rape",
+      "description": "Sexual intercourse without consent or with consent obtained by threats/fraud/coercion",
+      "punishment": {
+        "imprisonment": "Minimum 10 years, Maximum Life",
+        "fine": "Yes"
+      },
+      "constitution_articles": [
+        {
+          "article": 21,
+          "title": "Right to Life and Personal Liberty",
+          "relevance": "Protects bodily autonomy and dignity of rape survivor",
+          "text": "Includes right to dignity, privacy, and bodily integrity"
+        },
+        {
+          "article": 14,
+          "title": "Equality Before Law",
+          "relevance": "Ensures equal justice regardless of victim's gender, caste, religion"
+        },
+        {
+          "article": 15,
+          "subsection": "1",
+          "title": "Prohibition of Discrimination",
+          "relevance": "Protects against discrimination in legal proceedings"
+        }
+      ],
+      "victim_rights": [
+        "Right to privacy and anonymity in case",
+        "Right to be examined by female medical officer only",
+        "Right to file FIR at any police station (Zero FIR)",
+        "Right to free legal aid",
+        "Right to counseling and psychological support",
+        "Right to compensation from State",
+        "Right to witness protection if threatened",
+        "Right to be informed of court proceedings",
+        "Right to rehabilitation assistance",
+        "Right to claim loss of wages and medical expenses",
+        "Right to file case even after marriage to accused"
+      ],
+      "remedies_and_paths": [
+        {
+          "path_number": 1,
+          "name": "Criminal Prosecution (Primary Remedy)",
+          "steps": [
+            "File FIR at any police station (regardless of jurisdiction)",
+            "Medical examination by female doctor (Section 54 BNSS)",
+            "Detailed statement to police",
+            "Investigation by trained officers",
+            "Chargesheet in court (within 90 days)",
+            "Examination and cross-examination in court",
+            "Verdict and sentencing"
+          ],
+          "time_expected": "2-5 years",
+          "police_contact": "100",
+          "women_helpline": "181"
+        },
+        {
+          "path_number": 2,
+          "name": "Compensation from State",
+          "steps": [
+            "Apply to District Legal Services Authority",
+            "Submit FIR, medical reports, proof of damages",
+            "Evaluation by compensation committee",
+            "Award compensation"
+          ],
+          "time_expected": "6-12 months",
+          "amount_range": "₹5-25 lakhs depending on circumstances"
+        },
+        {
+          "path_number": 3,
+          "name": "Civil Suit for Damages",
+          "steps": [
+            "File suit for tort of negligence or intentional wrong",
+            "Prove damages and causation",
+            "Recover compensation in civil court"
+          ]
+        },
+        {
+          "path_number": 4,
+          "name": "Rehabilitation and Support",
+          "steps": [
+            "Register with One-Stop Centre for counseling",
+            "Avail shelters under UJJWALA scheme if needed",
+            "Receive vocational training if required",
+            "Medical and psychological support"
+          ]
+        }
+      ],
+      "support_organizations": [
+        {
+          "name": "Women's Helpline",
+          "phone": "181",
+          "services": "24/7 counseling, legal aid, shelter information"
+        },
+        {
+          "name": "NALSA Victim Compensation",
+          "phone": "15100",
+          "services": "Free legal aid, compensation assistance"
+        },
+        {
+          "name": "One-Stop Centre (OSC)",
+          "services": "Integrated support: medical, legal, psychological, shelter",
+          "website": "ossc.nic.in"
+        },
+        {
+          "name": "UJJWALA Scheme",
+          "services": "Rehabilitation of survivors of trafficking and sexual violence"
+        },
+        {
+          "name": "Bhumika/Local NGOs",
+          "services": "Counseling, legal support, safe houses"
+        }
+      ],
+      "procedural_protections": [
+        "Testimony can be recorded in camera (in private)",
+        "Victim need not identify herself in court",
+        "No question about victim's past sexual history without permission",
+        "Immediate FIR recording mandatory",
+        "Cannot be subjected to polygraph test without consent"
+      ],
+      "special_provisions": {
+        "zero_fir": "Can file at any police station regardless of jurisdiction",
+        "anonymity": "Name not published in media",
+        "medical_examination": "Only by female doctor, free of charge",
+        "trauma_informed_procedures": "Investigation by specially trained officers"
+      }
+    },
+    {
+      "bns_id": 74,
+      "title": "Assault on Woman with Intent to Outrage Modesty",
+      "description": "Criminal force or assault on woman with intent to outrage or knowing it will outrage modesty",
+      "punishment": {
+        "imprisonment": "Minimum 1 year, Maximum 5 years",
+        "fine": "Yes"
+      },
+      "constitution_articles": [
+        {
+          "article": 21,
+          "title": "Right to Life with Dignity",
+          "relevance": "Protects dignity and bodily autonomy of women"
+        },
+        {
+          "article": 15,
+          "subsection": "3",
+          "title": "State Power to Make Affirmative Provisions",
+          "relevance": "State can make special provisions for women's protection"
+        }
+      ],
+      "victim_rights": [
+        "Right to file FIR with police",
+        "Right to be examined by female doctor only",
+        "Right to free legal aid",
+        "Right to compensation",
+        "Right to privacy in proceedings",
+        "Right to witness protection"
+      ],
+      "remedies_and_paths": [
+        {
+          "path_number": 1,
+          "name": "Police FIR and Prosecution",
+          "steps": [
+            "File FIR under BNS 74",
+            "Medical examination (Section 54 BNSS)",
+            "Investigation",
+            "Prosecution in court"
+          ],
+          "time_expected": "1-2 years"
+        },
+        {
+          "path_number": 2,
+          "name": "Victim Compensation",
+          "steps": [
+            "Apply to Victim Compensation Scheme",
+            "Submit FIR and medical reports",
+            "Get compensation for trauma and damages"
+          ],
+          "amount_range": "₹1-5 lakhs"
+        }
+      ],
+      "support_organizations": [
+        {
+          "name": "Police Women's Cell",
+          "phone": "100"
+        },
+        {
+          "name": "Women's Helpline",
+          "phone": "181"
+        }
+      ]
+    },
+    {
+      "bns_id": 85,
+      "title": "Cruelty by Husband or Relatives",
+      "description": "Subjecting woman to cruelty, including harassment for dowry or conduct likely to drive her to suicide",
+      "punishment": {
+        "imprisonment": "Up to 3 years",
+        "fine": "Yes"
+      },
+      "constitution_articles": [
+        {
+          "article": 21,
+          "title": "Right to Life and Dignity",
+          "relevance": "Protects woman's right to dignity in marriage"
+        },
+        {
+          "article": 15,
+          "subsection": "1",
+          "title": "Prohibition of Discrimination",
+          "relevance": "Prohibits discrimination on basis of sex"
+        }
+      ],
+      "victim_rights": [
+        "Right to legal protection from cruelty",
+        "Right to maintenance from spouse",
+        "Right to custody of children",
+        "Right to protection from harassment",
+        "Right to police intervention",
+        "Right to legal separation or divorce"
+      ],
+      "remedies_and_paths": [
+        {
+          "path_number": 1,
+          "name": "Criminal Case Under BNS 85",
+          "steps": [
+            "File FIR with police",
+            "Investigation",
+            "Case in court",
+            "Conviction and punishment of accused"
+          ]
+        },
+        {
+          "path_number": 2,
+          "name": "Protection Order Under Domestic Violence Act 2005",
+          "steps": [
+            "File application with Magistrate",
+            "Get Residence Order (right to stay in marital home)",
+            "Get Protection Order (restraining from violence)",
+            "Get Maintenance Order (financial support)",
+            "Get Custody Order (for children)"
+          ],
+          "time_expected": "2-6 months"
+        },
+        {
+          "path_number": 3,
+          "name": "Civil Remedies",
+          "steps": [
+            "File for divorce under Hindu Marriage Act",
+            "Claim maintenance under Section 25 HMA",
+            "Claim alimony and property division",
+            "Get child custody orders"
+          ]
+        },
+        {
+          "path_number": 4,
+          "name": "Shelter and Support",
+          "steps": [
+            "Approach One-Stop Centre",
+            "Access to shelter homes",
+            "Counseling services",
+            "Legal aid"
+          ]
+        }
+      ],
+      "support_organizations": [
+        {
+          "name": "Women's Helpline",
+          "phone": "181",
+          "services": "24/7 counseling and emergency support"
+        },
+        {
+          "name": "Domestic Violence Helpline",
+          "phone": "1800-180-1111",
+          "services": "Toll-free counseling"
+        },
+        {
+          "name": "One-Stop Centre",
+          "services": "Legal aid, shelter, counseling",
+          "website": "ossc.nic.in"
+        }
+      ]
+    },
+    {
+      "bns_id": 84,
+      "title": "Dowry Death",
+      "description": "Death of woman by burns or bodily injury within 7 years of marriage under circumstances suggesting dowry harassment",
+      "punishment": {
+        "imprisonment": "Minimum 7 years, Maximum Life",
+        "fine": "Yes"
+      },
+      "constitution_articles": [
+        {
+          "article": 21,
+          "title": "Right to Life",
+          "relevance": "Right to life of women protected especially in matrimonial context"
+        },
+        {
+          "article": 15,
+          "subsection": "3",
+          "title": "State Power to Make Special Provisions for Women",
+          "relevance": "State enacted special protection against dowry"
+        }
+      ],
+      "victim_rights": [
+        "Right to justice and punishment of perpetrators",
+        "Right to compensation to heirs from State",
+        "Right to compensation from dowry-demander",
+        "Right to insurance claims",
+        "Right to investigation without delay"
+      ],
+      "remedies_and_paths": [
+        {
+          "path_number": 1,
+          "name": "Criminal Prosecution (Mandatory)",
+          "steps": [
+            "Case registered immediately (cannot refuse FIR)",
+            "Investigation by special cell",
+            "Examination of medical reports",
+            "Chargesheet and prosecution",
+            "Trial and conviction"
+          ],
+          "time_expected": "2-4 years",
+          "special_note": "Strict liability - burden of proof on accused to prove innocence"
+        },
+        {
+          "path_number": 2,
+          "name": "Dowry Prohibition Act Case",
+          "steps": [
+            "File case under Dowry Prohibition Act",
+            "Claim recovery of dowry amount",
+            "Prosecution of dowry-givers and takers"
+          ]
+        },
+        {
+          "path_number": 3,
+          "name": "Compensation to Heirs",
+          "steps": [
+            "Apply to Victim Compensation Scheme",
+            "Get compensation for loss of bread-earner",
+            "Compensation for dependent children and parents"
+          ],
+          "amount_range": "₹10-25 lakhs"
+        },
+        {
+          "path_number": 4,
+          "name": "Insurance and Financial Benefits",
+          "steps": [
+            "Claim life insurance if available",
+            "Claim from health insurance",
+            "Social security benefits for children and parents"
+          ]
+        }
+      ],
+      "support_organizations": [
+        {
+          "name": "National Commission for Women",
+          "phone": "7827-170-170",
+          "services": "Investigation support, legal guidance"
+        },
+        {
+          "name": "Dowry Prohibition Cell",
+          "services": "Special investigation and prosecution"
+        }
+      ],
+      "special_provisions": {
+        "burden_of_proof": "Reversed - accused must prove innocence",
+        "custody_period": "Police can custody for up to 14 days without magistrate's permission",
+        "fir_refusal": "Police cannot refuse to file FIR - can approach superintendent",
+        "evidence_preservation": "All medical records and evidence must be preserved"
+      }
+    },
+    {
+      "bns_id": 308,
+      "title": "Extortion",
+      "description": "Intentionally putting any person in fear of injury to induce dishonest delivery of property",
+      "punishment": {
+        "imprisonment": "Up to 3 years",
+        "fine": "Yes"
+      },
+      "constitution_articles": [
+        {
+          "article": 300,
+          "subsection": "A",
+          "title": "Protection of Property",
+          "relevance": "Protects property rights of victim"
+        },
+        {
+          "article": 19,
+          "subsection": "1(g)",
+          "title": "Freedom of Profession/Business",
+          "relevance": "Protects business from extortion threats"
+        },
+        {
+          "article": 21,
+          "title": "Right to Life and Security",
+          "relevance": "Protects victim from threats and fear"
+        }
+      ],
+      "victim_rights": [
+        "Right to file FIR against extortionists",
+        "Right to police protection",
+        "Right to get recovery of property/money",
+        "Right to compensation",
+        "Right to restraining orders against harasser",
+        "Right to witness protection if needed"
+      ],
+      "remedies_and_paths": [
+        {
+          "path_number": 1,
+          "name": "Police FIR and Criminal Case",
+          "steps": [
+            "File FIR at police station",
+            "File written complaint if police refuses",
+            "Police investigation and evidence collection",
+            "Recording of witnesses and evidence",
+            "Chargesheet and prosecution",
+            "Court conviction and recovery orders"
+          ],
+          "time_expected": "1-3 years",
+          "police_contact": "100"
+        },
+        {
+          "path_number": 2,
+          "name": "Protection Orders",
+          "steps": [
+            "Apply to magistrate for protection order",
+            "Get restraining order against extortionist",
+            "Police enforcement of order",
+            "Complaint if order violated"
+          ]
+        },
+        {
+          "path_number": 3,
+          "name": "Recovery of Property/Money",
+          "steps": [
+            "Court order for recovery from convicted person",
+            "Execution of court order",
+            "Recovery of money/property"
+          ],
+          "note": "If convict cannot pay, victim can file execution petition"
+        },
+        {
+          "path_number": 4,
+          "name": "Cyber Extortion Cases",
+          "steps": [
+            "File cyber crime complaint",
+            "Approach Cyber Cell/Crime Branch",
+            "Online investigation and tracking",
+            "Digital evidence preservation"
+          ]
+        }
+      ],
+      "support_organizations": [
+        {
+          "name": "Local Police Station",
+          "phone": "100"
+        },
+        {
+          "name": "Cyber Crime Cell",
+          "services": "For online extortion and threats"
+        },
+        {
+          "name": "Anti-Extortion Cell",
+          "services": "Specialized units in metro cities"
+        }
+      ]
+    },
+    {
+      "bns_id": 351,
+      "title": "Assault",
+      "description": "Making any gesture or preparation intending or knowing it likely to cause apprehension of criminal force",
+      "punishment": {
+        "imprisonment": "Up to 3 months",
+        "fine": "Up to ₹250"
+      },
+      "constitution_articles": [
+        {
+          "article": 21,
+          "title": "Right to Life and Personal Liberty",
+          "relevance": "Protects from threat of force and intimidation"
+        },
+        {
+          "article": 19,
+          "subsection": "1(a)",
+          "title": "Freedom of Movement",
+          "relevance": "Protects right to move freely without threat"
+        }
+      ],
+      "victim_rights": [
+        "Right to file complaint with police",
+        "Right to get protection order",
+        "Right to compensation for trauma",
+        "Right to restraining order"
+      ],
+      "remedies_and_paths": [
+        {
+          "path_number": 1,
+          "name": "Police Complaint and FIR",
+          "steps": [
+            "Lodge FIR with police",
+            "Statement recording",
+            "Investigation",
+            "Court prosecution"
+          ],
+          "time_expected": "6-12 months"
+        },
+        {
+          "path_number": 2,
+          "name": "Protective Order",
+          "steps": [
+            "Apply to magistrate",
+            "Get protection order",
+            "Restraining order against accused"
+          ]
+        }
+      ]
+    },
+    {
+      "bns_id": 318,
+      "title": "Cheating and Fraud",
+      "description": "Deceiving any person and fraudulently inducing delivery of property or retention of property",
+      "punishment": {
+        "imprisonment": "Up to 3 years",
+        "fine": "Yes or both"
+      },
+      "constitution_articles": [
+        {
+          "article": 300,
+          "subsection": "A",
+          "title": "Protection of Property",
+          "relevance": "Protects property from fraudulent taking"
+        },
+        {
+          "article": 19,
+          "subsection": "1(g)",
+          "title": "Right to Profession",
+          "relevance": "Protects from fraud in business transactions"
+        }
+      ],
+      "victim_rights": [
+        "Right to file FIR against fraudster",
+        "Right to get recovery of money/property",
+        "Right to compensation for loss",
+        "Right to restrain transfer of property",
+        "Right to civil suit for damages"
+      ],
+      "remedies_and_paths": [
+        {
+          "path_number": 1,
+          "name": "Criminal Case and FIR",
+          "steps": [
+            "File FIR with police",
+            "Investigation",
+            "Collection of documentary evidence",
+            "Prosecution and trial",
+            "Conviction and recovery orders"
+          ],
+          "time_expected": "1-3 years"
+        },
+        {
+          "path_number": 2,
+          "name": "Recovery Before Judgment (Attachment)",
+          "steps": [
+            "File application to court",
+            "Court attaches property of accused",
+            "Recovery from attached property"
+          ]
+        },
+        {
+          "path_number": 3,
+          "name": "Civil Suit for Damages",
+          "steps": [
+            "File suit for recovery of amount",
+            "Prove fraud and damages",
+            "Get judgment for recovery"
+          ]
+        },
+        {
+          "path_number": 4,
+          "name": "Consumer Protection (if applicable)",
+          "steps": [
+            "File complaint with Consumer Commission",
+            "Get compensation for defective goods/services",
+            "Penalty and refund order"
+          ]
+        }
+      ],
+      "support_organizations": [
+        {
+          "name": "Police Economic Offences Wing",
+          "services": "Investigation of financial fraud"
+        },
+        {
+          "name": "Cyber Crime Cell",
+          "services": "For online fraud and digital fraud"
+        }
+      ]
+    },
+    {
+      "bns_id": 316,
+      "title": "Criminal Breach of Trust",
+      "description": "Being entrusted with property and dishonestly misappropriating or converting for own use",
+      "punishment": {
+        "imprisonment": "Up to 7 years",
+        "fine": "Yes"
+      },
+      "constitution_articles": [
+        {
+          "article": 300,
+          "subsection": "A",
+          "title": "Protection of Property",
+          "relevance": "Protects entrusted property of victim"
+        },
+        {
+          "article": 19,
+          "subsection": "1(g)",
+          "title": "Right to Profession",
+          "relevance": "Protects business relationships from breach"
+        }
+      ],
+      "victim_rights": [
+        "Right to file FIR against breach of trust",
+        "Right to get recovery of property",
+        "Right to compensation for loss",
+        "Right to civil remedies",
+        "Right to preventive attachment of property"
+      ],
+      "remedies_and_paths": [
+        {
+          "path_number": 1,
+          "name": "Criminal Prosecution",
+          "steps": [
+            "File FIR with police",
+            "Investigation of trust breach",
+            "Documentary evidence collection",
+            "Chargesheet and trial",
+            "Conviction and recovery"
+          ]
+        },
+        {
+          "path_number": 2,
+          "name": "Recovery of Entrusted Property",
+          "steps": [
+            "Court orders recovery of specific property",
+            "Execution of court order",
+            "Recovery and restitution to victim"
+          ]
+        },
+        {
+          "path_number": 3,
+          "name": "Compensation for Loss",
+          "steps": [
+            "Claim compensation from accused",
+            "Prove loss amount",
+            "Get judgment for recovery"
+          ]
+        }
+      ]
+    }
+  ],
+  "constitutional_framework": {
+    "fundamental_rights": [
+      {
+        "article": 14,
+        "title": "Equality Before Law",
+        "application_to_victims": "Ensures equal justice for all victims regardless of caste, religion, gender, or social status"
+      },
+      {
+        "article": 15,
+        "title": "Prohibition of Discrimination",
+        "subsection": "1",
+        "application_to_victims": "State cannot discriminate against victims based on sex, caste, religion, place of birth, or status"
+      },
+      {
+        "article": 19,
+        "subsection": "1",
+        "title": "Right to Protection of Certain Rights Regarding Freedom",
+        "application_to_victims": "Protects victim's right to freedom and liberty during legal proceedings"
+      },
+      {
+        "article": 21,
+        "title": "Right to Life and Personal Liberty",
+        "application_to_victims": "Protects victim's dignity, privacy, bodily integrity, and mental wellbeing",
+        "landmark_cases": [
+          "Kesavananda Bharati v State of Kerala - Right to life includes right to dignity",
+          "Selvi v State of Karnataka - Right to bodily autonomy"
+        ]
+      },
+      {
+        "article": 300,
+        "subsection": "A",
+        "title": "Right to Property",
+        "application_to_victims": "Protects victim's property from theft, extortion, breach of trust, and fraud"
+      }
+    ],
+    "directive_principles": [
+      {
+        "article": 39,
+        "subsection": "f",
+        "title": "Equal Pay for Equal Work",
+        "application_to_victims": "If victim's livelihood affected, state must ensure equal treatment"
+      },
+      {
+        "article": 39,
+        "subsection": "e",
+        "title": "Prevent Exploitation",
+        "application_to_victims": "State must take steps to prevent exploitation and abuse of citizens"
+      }
+    ]
+  },
+  "victim_compensation_framework": {
+    "scheme_name": "Crime Victim Compensation Scheme",
+    "applicability": "All states (though amount and procedures vary)",
+    "eligibility": [
+      "Victim of crime committed after scheme notification",
+      "Victim must file FIR",
+      "Victim must apply within prescribed time"
+    ],
+    "typical_compensation_ranges": {
+      "murder": "₹5-10 lakhs for dependents",
+      "rape": "₹5-25 lakhs",
+      "grievous_hurt": "₹1-5 lakhs",
+      "grievous_hurt_with_disability": "₹5-10 lakhs",
+      "simple_hurt": "₹10,000-50,000",
+      "theft": "Value of property + 10-20%",
+      "dowry_death": "₹10-25 lakhs to heirs"
+    },
+    "how_to_apply": [
+      "Approach District Legal Services Authority (DLSA)",
+      "Submit written application with documents",
+      "Attach FIR copy, medical reports, proof of loss",
+      "Attend interview if required",
+      "Receive compensation order from DLSA"
+    ]
+  },
+  "victim_support_services": [
+    {
+      "name": "Police Emergency",
+      "number": "100",
+      "availability": "24/7",
+      "services": "Emergency assistance, FIR registration"
+    },
+    {
+      "name": "Women's Helpline",
+      "number": "181",
+      "availability": "24/7",
+      "services": "Counseling, shelter information, legal guidance"
+    },
+    {
+      "name": "NALSA Legal Aid",
+      "number": "15100",
+      "availability": "24/7",
+      "services": "Free legal aid, victim compensation assistance"
+    },
+    {
+      "name": "Ambulance/Medical Emergency",
+      "number": "108",
+      "availability": "24/7",
+      "services": "Emergency medical assistance"
+    },
+    {
+      "name": "Child Helpline",
+      "number": "1098",
+      "availability": "24/7",
+      "services": "For child victims and abuse cases"
+    },
+    {
+      "name": "National Commission for Women",
+      "number": "7827-170-170",
+      "availability": "Office hours",
+      "services": "Support for women victims"
+    },
+    {
+      "name": "One-Stop Centre (OSC)",
+      "website": "ossc.nic.in",
+      "services": "Integrated support: medical, legal, psychological, shelter",
+      "note": "Present in major cities and districts"
+    }
+  ],
+  "procedural_safeguards_for_victims": [
+    {
+      "safeguard": "Zero FIR",
+      "description": "File FIR at any police station regardless of jurisdiction, transferred to appropriate station within 15 days"
+    },
+    {
+      "safeguard": "Free Legal Aid",
+      "description": "Victims below poverty line get free legal representation",
+      "reference": "Section 304 BNSS"
+    },
+    {
+      "safeguard": "Medical Examination Rights",
+      "description": "Medical examination free of charge, conducted by officer of victim's choice (preferably same gender for sexual crimes)"
+    },
+    {
+      "safeguard": "Privacy Protection",
+      "description": "Victim's identity protected in certain cases (especially sexual crimes)",
+      "reference": "BNS Sections applicable to crime"
+    },
+    {
+      "safeguard": "Victim Impact Statement",
+      "description": "Victim can present statement about impact of crime on them",
+      "reference": "Section 234 BNSS"
+    },
+    {
+      "safeguard": "Witness Protection",
+      "description": "If victim threatened, can request witness protection",
+      "reference": "Victim Protection Scheme"
+    },
+    {
+      "safeguard": "Interim Compensation",
+      "description": "While case pending, victim can apply for interim relief",
+      "reference": "Crime Victim Compensation Scheme"
+    },
+    {
+      "safeguard": "Information Rights",
+      "description": "Victim has right to know status of investigation and court proceedings"
+    }
+  ],
+  "landmarks_cases": [
+    {
+      "case_name": "Nirbhaya Case (2012)",
+      "details": "Delhi rape case leading to amendments in rape laws and victim protection measures"
+    },
+    {
+      "case_name": "Budhadev Karmaskar v State of West Bengal (2006)",
+      "details": "Case on right to life including right to food, shelter, education"
+    },
+    {
+      "case_name": "Kesavananda Bharati v State of Kerala (1973)",
+      "details": "Established right to dignity as part of right to life under Article 21"
+    },
+    {
+      "case_name": "Selvi v State of Karnataka (2010)",
+      "details": "Right to bodily autonomy and refusal of invasive procedures"
+    }
+  ],
+  "how_to_use_this_mapping": {
+    "for_law_students": "Understand each BNS section with constitutional backing and victim remedies",
+    "for_ngos": "Use as framework for victim counseling and guidance",
+    "for_police": "Reference for victim rights and procedural requirements",
+    "for_judges": "Consider constitutional dimensions while sentencing",
+    "for_victims": "Know your rights and available remedies",
+    "for_legal_aid": "Use to provide comprehensive legal information"
+  },
+  "api_endpoints": {
+    "get_all_sections": "/api/bns-constitution/all",
+    "get_section_by_id": "/api/bns-constitution/section/{bns_id}",
+    "get_victim_rights": "/api/bns-constitution/victim-rights/{bns_id}",
+    "get_remedies": "/api/bns-constitution/remedies/{bns_id}",
+    "get_support_services": "/api/bns-constitution/support-services",
+    "search": "/api/bns-constitution/search?keyword={keyword}"
+  }
+}

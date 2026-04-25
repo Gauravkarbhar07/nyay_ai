@@ -84,17 +84,29 @@ def chat():
                     'language': language,
                     'mode': 'offline',
                     'is_crime': is_crime_query(user_query),
-                    'query_category': detect_query_category(user_query)
+                    'query_category': detect_query_category(user_query),
+                    'retrieved_sections': 0,
+                    'similarity_scores': [],
+                    'mapping': None
                 })
         
-        # Step 3: Retrieve relevant law sections using RAG
+        # Step 3: Retrieve relevant law sections using RAG with scores
         retrieved_laws = []
+        retrieved_with_scores = []
         try:
-            from rag import retrieve_relevant_laws
-            retrieved_laws = retrieve_relevant_laws(user_query, top_k=4)
-            print(f"[APP] Retrieved {len(retrieved_laws)} law sections")
+            from rag import retrieve_relevant_laws_with_scores, get_bns_constitution_mapping
+            retrieved_with_scores = retrieve_relevant_laws_with_scores(user_query, top_k=4)
+            retrieved_laws = [item[0] for item in retrieved_with_scores]
+            print(f"[APP] Retrieved {len(retrieved_with_scores)} law sections with scores")
         except Exception as e:
-            print(f"[APP] RAG retrieval warning: {e}")
+            print(f"[APP] RAG retrieval with scores warning: {e}")
+            try:
+                from rag import retrieve_relevant_laws
+                retrieved_laws = retrieve_relevant_laws(user_query, top_k=4)
+                retrieved_with_scores = [(law, 0.0, i) for i, law in enumerate(retrieved_laws)]
+            except Exception as e2:
+                print(f"[APP] RAG retrieval fallback warning: {e2}")
+                retrieved_laws = []
         
         # Step 4: Detect query category
         query_type = detect_query_category(user_query)
@@ -102,14 +114,33 @@ def chat():
         # Step 5: Generate response using Gemini
         response = generate_legal_response(user_query, retrieved_laws, language, query_type)
         
-        # Step 6: Add additional metadata
+        # Step 6: Extract mapping information
+        mapping_data = None
+        try:
+            from rag import get_bns_constitution_mapping
+            mapping_data = get_bns_constitution_mapping(user_query)
+        except Exception as e:
+            print(f"[APP] Mapping retrieval warning: {e}")
+        
+        # Step 7: Prepare similarity scores (R values)
+        similarity_scores = []
+        for law_text, score, idx in retrieved_with_scores:
+            similarity_scores.append({
+                'index': idx,
+                'r_value': round(score, 4),  # Cosine similarity score
+                'text_preview': law_text[:100] + '...' if len(law_text) > 100 else law_text
+            })
+        
+        # Step 8: Add additional metadata
         result = {
             'response': response,
             'language': language,
             'mode': 'online',
             'is_crime': is_crime_query(user_query),
             'query_category': query_type,
-            'retrieved_sections': len(retrieved_laws)
+            'retrieved_sections': len(retrieved_laws),
+            'similarity_scores': similarity_scores,  # R values
+            'mapping': mapping_data  # BNS-Constitution mapping
         }
         
         return jsonify(result)
@@ -130,7 +161,9 @@ def chat():
             'mode': 'offline',
             'is_crime': False,
             'query_category': 'general',
-            'retrieved_sections': 0
+            'retrieved_sections': 0,
+            'similarity_scores': [],
+            'mapping': None
         })
 
 

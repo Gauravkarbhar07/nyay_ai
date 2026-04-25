@@ -185,6 +185,32 @@ def retrieve_relevant_laws(query, top_k=5):
         return ['कायदेशीर माहिती उपलब्ध नाही / Legal information not available']
 
     if use_transformer and embeddings is not None:
+        results = _retrieve_with_faiss(query, top_k)
+    elif use_tfidf and tfidf_vectorizer is not None:
+        results = _retrieve_with_tfidf(query, top_k)
+    else:
+        # Pure-Python keyword fallback (no external dependencies)
+        results = _retrieve_with_keywords(query, top_k)
+    
+    # Return only chunks for backward compatibility
+    return [item[0] for item in results]
+
+
+def retrieve_relevant_laws_with_scores(query, top_k=5):
+    """
+    Retrieve the most relevant law sections with cosine similarity scores.
+    Returns a list of tuples: (chunk_text, cosine_similarity_score, chunk_index)
+    """
+    global chunks, embeddings, use_transformer, use_tfidf, tfidf_vectorizer, tfidf_matrix
+
+    if not chunks:
+        load_and_chunk_laws()
+        build_index()
+
+    if not chunks:
+        return [('कायदेशीर माहिती उपलब्ध नाही / Legal information not available', 0.0, 0)]
+
+    if use_transformer and embeddings is not None:
         return _retrieve_with_faiss(query, top_k)
     elif use_tfidf and tfidf_vectorizer is not None:
         return _retrieve_with_tfidf(query, top_k)
@@ -194,7 +220,7 @@ def retrieve_relevant_laws(query, top_k=5):
 
 
 def _retrieve_with_faiss(query, top_k):
-    """Retrieve using FAISS similarity search"""
+    """Retrieve using FAISS similarity search. Returns (chunk, score, index) tuples"""
     try:
         import faiss
         from sentence_transformers import SentenceTransformer
@@ -213,7 +239,12 @@ def _retrieve_with_faiss(query, top_k):
         scores = np.dot(emb_norm, query_norm.T).flatten()
         top_indices = np.argsort(scores)[::-1][:top_k]
         
-        return [chunks[i] for i in top_indices if scores[i] > 0.1]
+        results = []
+        for idx in top_indices:
+            if scores[idx] > 0.1:
+                results.append((chunks[idx], float(scores[idx]), int(idx)))
+        
+        return results if results else [(chunks[0], 0.0, 0)]
         
     except Exception as e:
         print(f"[RAG] FAISS retrieval failed: {e}")
@@ -221,7 +252,7 @@ def _retrieve_with_faiss(query, top_k):
 
 
 def _retrieve_with_tfidf(query, top_k):
-    """Retrieve using TF-IDF similarity"""
+    """Retrieve using TF-IDF similarity. Returns (chunk, score, index) tuples"""
     try:
         from sklearn.metrics.pairwise import cosine_similarity
         
@@ -229,7 +260,11 @@ def _retrieve_with_tfidf(query, top_k):
         scores = cosine_similarity(query_vec, tfidf_matrix).flatten()
         top_indices = np.argsort(scores)[::-1][:top_k]
         
-        results = [chunks[i] for i in top_indices if scores[i] > 0.01]
+        results = []
+        for idx in top_indices:
+            if scores[idx] > 0.01:
+                results.append((chunks[idx], float(scores[idx]), int(idx)))
+        
         return results if results else _retrieve_with_keywords(query, top_k)
         
     except Exception as e:
@@ -238,7 +273,7 @@ def _retrieve_with_tfidf(query, top_k):
 
 
 def _retrieve_with_keywords(query, top_k):
-    """Simple keyword-based retrieval as last resort"""
+    """Simple keyword-based retrieval as last resort. Returns (chunk, score, index) tuples"""
     query_lower = query.lower()
     query_words = set(query_lower.split())
     
@@ -257,13 +292,22 @@ def _retrieve_with_keywords(query, top_k):
         scored_chunks.append((score, i))
     
     scored_chunks.sort(reverse=True)
-    top_indices = [i for score, i in scored_chunks[:top_k] if score > 0]
     
-    if not top_indices:
+    results = []
+    for score, i in scored_chunks[:top_k]:
+        if score > 0:
+            # Normalize score to 0-1 range for consistency
+            normalized_score = min(score / 10.0, 1.0)
+            results.append((chunks[i], normalized_score, i))
+    
+    if not results:
         # Return general rights information
-        return [chunks[0], chunks[1]] if len(chunks) >= 2 else chunks
+        if len(chunks) >= 2:
+            results = [(chunks[0], 0.0, 0), (chunks[1], 0.0, 1)]
+        elif len(chunks) >= 1:
+            results = [(chunks[0], 0.0, 0)]
     
-    return [chunks[i] for i in top_indices]
+    return results
 
 
 def initialize():
@@ -272,6 +316,50 @@ def initialize():
     load_and_chunk_laws()
     build_index()
     print("[RAG] RAG system ready!")
+
+
+def get_bns_constitution_mapping(search_term=None):
+    """
+    Load BNS-Constitution mapping from JSON file.
+    If search_term provided, filters by BNS section or topic.
+    Returns the full mapping data or filtered sections.
+    """
+    import json
+    
+    mapping_file = os.path.join(os.path.dirname(__file__), 'data', 'bns_constitution_mapping.json')
+    
+    try:
+        with open(mapping_file, 'r', encoding='utf-8') as f:
+            mapping_data = json.load(f)
+        
+        if not search_term:
+            return mapping_data
+        
+        # Filter sections by search term
+        search_lower = search_term.lower()
+        filtered_sections = []
+        
+        for section in mapping_data.get('bns_sections', []):
+            section_id = str(section.get('bns_id', '')).lower()
+            title = section.get('title', '').lower()
+            description = section.get('description', '').lower()
+            
+            if (search_lower in section_id or 
+                search_lower in title or 
+                search_lower in description):
+                filtered_sections.append(section)
+        
+        # Return filtered or full mapping
+        if filtered_sections:
+            result = mapping_data.copy()
+            result['bns_sections'] = filtered_sections
+            return result
+        
+        return mapping_data
+    
+    except Exception as e:
+        print(f"[RAG] Error loading mapping: {e}")
+        return {'metadata': {}, 'bns_sections': []}
 
 
 # Initialize when module is loaded
